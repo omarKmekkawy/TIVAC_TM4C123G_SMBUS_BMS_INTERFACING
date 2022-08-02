@@ -1,7 +1,7 @@
 # Project TODO List
 |#|Task|Completed ?|Comments|
 |---|---|---|---|
-|1|Writing SMBus driver for BMS|<b><span style="color: green">&check;</span></b>| Waiting for Testing |
+|1|Writing SMBus driver for BMS|<b><span style="color: green">&check;</span></b>| |
 |2|Testing the code before push|<b><span style="color: green">&check;</span></b> |
 |3|Push the SMBus driver for BMS to the public|<b><span style="color: green">&check;</span></b> |
 |4|Documenting my work on GitHub|<b><span style="color: green">&check;</span></b>|
