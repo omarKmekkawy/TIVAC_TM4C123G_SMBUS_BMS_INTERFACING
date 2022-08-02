@@ -2,9 +2,9 @@
 |#|Task|Completed ?|Comments|
 |---|---|---|---|
 |1|Writing SMBus driver for BMS|<b><span style="color: green">&check;</span></b>| Waiting for Testing |
-|2|Testing the code before push|<b><span style="color: red">✗</span></b>| Rescheduled to 5/9/2022 |
-|3|Push the SMBus driver for BMS to the public|<b><span style="color: red">✗</span></b>| Rescheduled to 5/9/2022 |
-|4|Documenting my work on GitHub|<b><span style="color: red">✗</span></b>|
+|2|Testing the code before push|<b><span style="color: green">&check;</span></b> |
+|3|Push the SMBus driver for BMS to the public|<b><span style="color: green">&check;</span></b> |
+|4|Documenting my work on GitHub|<b><span style="color: green">&check;</span></b>|
 |5|Integrating BQ24725 Smart Charger|<b><span style="color: red">✗</span></b>|
 
 # TIVAC_TM4C123G_SMBUS_BMS_INTERFACING
