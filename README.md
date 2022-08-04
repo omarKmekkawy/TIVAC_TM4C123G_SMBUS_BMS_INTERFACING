@@ -424,6 +424,8 @@ We will see that the data matches with the Battery Management Studio.
 
 * Controlling both of the BMS and BQ24725 with CAN Bus.
 
+* Making a battery pack with more than one BMS connected together and controlling the battery pack using CAN BUS.
+
 # Notes
 This repository required a lot of work in many fields:
 * Hardware reverse engineering.
