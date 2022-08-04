@@ -150,11 +150,12 @@ Here is the connection diagram for the BMS:
 | BMS Board  | TIVAC TM4C123G LaunchPad™  |
 | ------------- | ------------- |
 | P+  | Not Connected |
-| P+  | PB2 |
+| P+  | Not Connected |
+| C  | PB2 |
 | D  | PB3 |
 | T  | Not Connected |
 | P-  | Connected To GND |
-| P-  |  |
+| P-  | Not Connected  |
 
 Here is how the BMS is interfaced with the TIVAC:
 <p align="center">
