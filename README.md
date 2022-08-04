@@ -404,7 +404,6 @@ Static Data:
 
 We will see that the data matches with the Battery Management Studio.
 
-
 # Useful Links
 * [SMBus Compatibility With an I²C Device](https://www.ti.com/lit/an/sloa132/sloa132.pdf).
 * [Implementing SMBus Using MSP430™ Hardware I²C](https://www.ti.com/lit/an/slaa249b/slaa249b.pdf).
@@ -425,11 +424,34 @@ We will see that the data matches with the Battery Management Studio.
 
 * Controlling both of the BMS and BQ24725 with CAN Bus.
 
+# Notes
+This repository required a lot of work in many fields:
+* Hardware reverse engineering.
+* Battery management systems.
+* Embedded Systems.
+* Communication Protocols Reverse Engineering.
+* Security.
+* Soldering.
+So, please consider that my work might not be perfect. This work could be done with a whole team and took around 2 years of non-continuous work by myself only.
+
+This repository needs a lot of work in order to get better code that works efficiently with no mistakes, and this will require lots of testing and maintaining the code.
+
+# Contribution
+All contributions are available to anyone who wants to make this work better. Thank you all for your support.
 
 # Support Me
-If you seen my work and it helped you, please support me on LinkedIn by endorsing my skills. It will be appreciated :grinning:.
+If you have seen my work and it helped you, please support me on LinkedIn by endorsing my skills. It will be appreciated :grinning:.
+
 <p>
   <a href="https://www.linkedin.com/in/omar-mekkawy/" rel="nofollow noreferrer">
     <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"  height="40" width="90" alt="linkedin">
   </a> &nbsp;
 </p>
+
+# Donate to My Work
+It would be a pleasure if you supported me on any of the following platforms; it will help finish this work and getting new tools.
+* [Buy Me A Cofee](https://www.buymeacoffee.com/omarmekkawy).
+* You can visit my [Patreon](https://www.patreon.com/OmarMekkawy) page and become a Patreon.
+* You can do a one-time donation via PayPal at [Donate Using Paypal](https://www.paypal.me/OmarKhaledMekkawy).
+
+Thank you for your support.
