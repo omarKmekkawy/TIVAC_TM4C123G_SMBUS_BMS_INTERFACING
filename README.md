@@ -246,6 +246,11 @@ I have used one USB isolator for each one of the following USB interfaces:
 * Logic Analyzer.
 * TivaC.
 * EV2400.
+
+ <p align="center">
+  <img width="100%" height="100%" src="./Images/System_Diagram.png">
+</p>
+
 Now the connection is ready.
 
 # Configuring The TIVAC Firmware
