@@ -337,20 +337,20 @@ void RemainingTimeAlarm_Write(uint16_t word)
 
 
 /**
- * This function selects the various battery operational modes and reports the batteryï¿½s capabilities, modes,
+ * This function selects the various battery operational modes and reports the battery’s capabilities, modes,
  * and flags minor conditions requiring attention.
  * Defined capabilities include:
- * ï¿½ Internal charge controller supported (INTERNAL_CHARGE_CONTROLLER bit)
- * ï¿½ Internal primary battery control supported (PRIMARY_BATTERY_SUPPORT bit)
+ * · Internal charge controller supported (INTERNAL_CHARGE_CONTROLLER bit)
+ * · Internal primary battery control supported (PRIMARY_BATTERY_SUPPORT bit)
  *   Note: These capabilities listed are optional but their indicating flag bits must be supported.
  * Defined modes include:
- * ï¿½ Battery's capacity information is specified to be reported in either mAh or 10 mWh (CAPACITY_MODE bit)
- * ï¿½ Whether the ChargingCurrent() and ChargingVoltage() values are to be broadcast to the Smart Battery
+ * · Battery's capacity information is specified to be reported in either mAh or 10 mWh (CAPACITY_MODE bit)
+ * · Whether the ChargingCurrent() and ChargingVoltage() values are to be broadcast to the Smart Battery
  *   Charger when the Smart Battery requires charging (CHARGER_MODE bit)
- * ï¿½ Internal charge controller enable (CHARGE_CONTROLLER_ENABLED bit) [Optional]
- * ï¿½ Internal primary battery control enable (PRIMARY_BATTERY bit) [Optional]
+ * · Internal charge controller enable (CHARGE_CONTROLLER_ENABLED bit) [Optional]
+ * · Internal primary battery control enable (PRIMARY_BATTERY bit) [Optional]
  * Defined conditions requiring attention include:
- * ï¿½ Battery requesting a conditioning cycle (CONDITION_FLAG bit)
+ * · Battery requesting a conditioning cycle (CONDITION_FLAG bit)
  * @details To allow configuration of the Smart Battery for particular application requirements. (See individual bit
  * definitions which follow.)
  * SMBus Protocol: Read or Write Word
@@ -386,20 +386,20 @@ uint16_t BatteryMode_Read(void)
 
 
 /**
- * This function selects the various battery operational modes and reports the batteryï¿½s capabilities, modes,
+ * This function selects the various battery operational modes and reports the battery’s capabilities, modes,
  * and flags minor conditions requiring attention.
  * Defined capabilities include:
- * ï¿½ Internal charge controller supported (INTERNAL_CHARGE_CONTROLLER bit)
- * ï¿½ Internal primary battery control supported (PRIMARY_BATTERY_SUPPORT bit)
+ * · Internal charge controller supported (INTERNAL_CHARGE_CONTROLLER bit)
+ * · Internal primary battery control supported (PRIMARY_BATTERY_SUPPORT bit)
  *   Note: These capabilities listed are optional but their indicating flag bits must be supported.
  * Defined modes include:
- * ï¿½ Battery's capacity information is specified to be reported in either mAh or 10 mWh (CAPACITY_MODE bit)
- * ï¿½ Whether the ChargingCurrent() and ChargingVoltage() values are to be broadcast to the Smart Battery
+ * · Battery's capacity information is specified to be reported in either mAh or 10 mWh (CAPACITY_MODE bit)
+ * · Whether the ChargingCurrent() and ChargingVoltage() values are to be broadcast to the Smart Battery
  *   Charger when the Smart Battery requires charging (CHARGER_MODE bit)
- * ï¿½ Internal charge controller enable (CHARGE_CONTROLLER_ENABLED bit) [Optional]
- * ï¿½ Internal primary battery control enable (PRIMARY_BATTERY bit) [Optional]
+ * · Internal charge controller enable (CHARGE_CONTROLLER_ENABLED bit) [Optional]
+ * · Internal primary battery control enable (PRIMARY_BATTERY bit) [Optional]
  * Defined conditions requiring attention include:
- * ï¿½ Battery requesting a conditioning cycle (CONDITION_FLAG bit)
+ * · Battery requesting a conditioning cycle (CONDITION_FLAG bit)
  * @details To allow configuration of the Smart Battery for particular application requirements. (See individual bit
  * definitions which follow.)
  * SMBus Protocol: Read or Write Word
@@ -427,16 +427,16 @@ void BatteryMode_Write(uint16_t word)
  * AtRate() function using the appropriate units.)
  * @details Since the AtRate() function is the first half of a two-function call-set, it is followed by the second function
  * of the call-set that calculates and returns a value based on the AtRate value and the battery's present state:
- * ï¿½ When the AtRate value is positive, the AtRateTimeToFull() function returns the predicted time to fullcharge at the AtRate value of charge. (This does NOT include the present charge or discharge rate and
+ * · When the AtRate value is positive, the AtRateTimeToFull() function returns the predicted time to fullcharge at the AtRate value of charge. (This does NOT include the present charge or discharge rate and
  *   so is calculated independently from the present charge or discharge rate of the battery.)
- * ï¿½ When the AtRate value is negative, the AtRateTimeToEmpty() function returns the predicted operating
+ * · When the AtRate value is negative, the AtRateTimeToEmpty() function returns the predicted operating
  *   time at the AtRate value of discharge. (This does NOT include the present charge or discharge rate and
  *   so is calculated independently from the present charge or discharge rate of the battery.)
- * ï¿½ When the AtRate value is negative, the AtRateOK() function returns a Boolean value that predicts the
+ * · When the AtRate value is negative, the AtRateOK() function returns a Boolean value that predicts the
  *   battery's ability to supply the AtRate value of additional discharge energy (current or power) for a
  *   minimum of 10 seconds. (This DOES include the present discharge rate of the battery and so is
- *   calculated differently from the previous ï¿½Timeï¿½ values listed.)
- * Timing Note: The Smart Battery may NACK the second function and return a ï¿½Busyï¿½ error code in
+ *   calculated differently from the previous ‘Time’ values listed.)
+ * Timing Note: The Smart Battery may NACK the second function and return a ‘Busy’ error code in
  *              BatteryStatus() while calculating the result based on a new AtRate() value. Conversely, the Smart Battery
  *              may use clock stretching during the second function to allow time to calculate the result.
  * SMBus Protocol: Read or Write Word
@@ -491,16 +491,16 @@ uint16_t AtRate_Read(void)
  * AtRate() function using the appropriate units.)
  * @details Since the AtRate() function is the first half of a two-function call-set, it is followed by the second function
  * of the call-set that calculates and returns a value based on the AtRate value and the battery's present state:
- * ï¿½ When the AtRate value is positive, the AtRateTimeToFull() function returns the predicted time to fullcharge at the AtRate value of charge. (This does NOT include the present charge or discharge rate and
+ * · When the AtRate value is positive, the AtRateTimeToFull() function returns the predicted time to fullcharge at the AtRate value of charge. (This does NOT include the present charge or discharge rate and
  *   so is calculated independently from the present charge or discharge rate of the battery.)
- * ï¿½ When the AtRate value is negative, the AtRateTimeToEmpty() function returns the predicted operating
+ * · When the AtRate value is negative, the AtRateTimeToEmpty() function returns the predicted operating
  *   time at the AtRate value of discharge. (This does NOT include the present charge or discharge rate and
  *   so is calculated independently from the present charge or discharge rate of the battery.)
- * ï¿½ When the AtRate value is negative, the AtRateOK() function returns a Boolean value that predicts the
+ * · When the AtRate value is negative, the AtRateOK() function returns a Boolean value that predicts the
  *   battery's ability to supply the AtRate value of additional discharge energy (current or power) for a
  *   minimum of 10 seconds. (This DOES include the present discharge rate of the battery and so is
- *   calculated differently from the previous ï¿½Timeï¿½ values listed.)
- * Timing Note: The Smart Battery may NACK the second function and return a ï¿½Busyï¿½ error code in
+ *   calculated differently from the previous ‘Time’ values listed.)
+ * Timing Note: The Smart Battery may NACK the second function and return a ‘Busy’ error code in
  *              BatteryStatus() while calculating the result based on a new AtRate() value. Conversely, the Smart Battery
  *              may use clock stretching during the second function to allow time to calculate the result.
  * SMBus Protocol: Read or Write Word
@@ -548,7 +548,7 @@ void AtRate_Write(uint16_t word)
  * Units:           minutes
  * Range:           0 to 65,534 min
  * Granularity:     2 min or better
- * Accuracy:        ï¿½MaxError()*FullChargeCapacity() ï¿½ |AtRate()|
+ * Accuracy:        ±MaxError()*FullChargeCapacity() ¸ |AtRate()|
  * See http://sbs-forum.org/specs/sbdat110.pdf page 22 for more details
  */
 uint16_t AtRateTimeToFull_Read(void)
@@ -587,7 +587,7 @@ uint16_t AtRateTimeToFull_Read(void)
  * Units:           minutes
  * Range:           0 to 65,534 min
  * Granularity:     2 min or better
- * Accuracy:        -0,+MaxError()*FullChargeCapacity() ï¿½ |AtRate()|
+ * Accuracy:        -0,+MaxError()*FullChargeCapacity() ¸ |AtRate()|
  * See http://sbs-forum.org/specs/sbdat110.pdf page 22 for more details
  */
 uint16_t AtRateTimeToEmpty_Read(void)
@@ -653,8 +653,8 @@ bool AtRateOK_Read(void)
 
 
 /**
- * Returns the cell-pack's internal temperature (ï¿½K). The actual operational temperature range will be defined
- * at a pack level by a particular manufacturer. Typically it will be in the range of -20ï¿½C to +75ï¿½C.
+ * Returns the cell-pack's internal temperature (°K). The actual operational temperature range will be defined
+ * at a pack level by a particular manufacturer. Typically it will be in the range of -20°C to +75°C.
  * @details The Temperature() function provides accurate cell temperatures for use by battery chargers and thermal
  * management systems. A battery charger will be able to use the temperature as a safety check. Thermal
  * management systems may use the temperature because the battery is one of the largest thermal sources in a
@@ -663,10 +663,10 @@ bool AtRateOK_Read(void)
  * SMBus Protocol: Read Word
  * Address:         0x08
  * Output:          unsigned int -- cell temperature in tenth degree Kelvin increments
- * Units:           0.1ï¿½K
- * Range:           0 to +6553.5ï¿½K
- * Granularity:     0.5ï¿½K or better
- * Accuracy:        ï¿½3ï¿½K
+ * Units:           0.1°K
+ * Range:           0 to +6553.5°K
+ * Granularity:     0.5°K or better
+ * Accuracy:        ±3°K
  * See http://sbs-forum.org/specs/sbdat110.pdf page 23 for more details
  */
 uint16_t Temperature_Read(void)
@@ -706,7 +706,7 @@ uint16_t Temperature_Read(void)
  * Units:           mV
  * Range:           0 to 65,535 mV
  * Granularity:     0.2% of DesignVoltage()
- * Accuracy:        ï¿½1.0% of DesignVoltage()
+ * Accuracy:        ±1.0% of DesignVoltage()
  * See http://sbs-forum.org/specs/sbdat110.pdf page 24 for more details
  */
 uint16_t Voltage_Read(void)
@@ -743,7 +743,7 @@ uint16_t Voltage_Read(void)
  * Range:           0 to 32,767 mA for charge or
  *                  0 to -32,768 mA for discharge
  * Granularity:     0.2% of the DesignCapacity() or better
- * Accuracy:        ï¿½1.0% of the DesignCapacity()
+ * Accuracy:        ±1.0% of the DesignCapacity()
  * See http://sbs-forum.org/specs/sbdat110.pdf page 24 for more details
  */
 int16_t Current_Read(void)
@@ -780,7 +780,7 @@ int16_t Current_Read(void)
  * Units:           mA
  * Range:           0 to 32,767 mA for charge or 0 to -32,768 mA for discharge
  * Granularity:     0.2% of the DesignCapacity() or better
- * Accuracy:        ï¿½1.0% of the DesignCapacity()
+ * Accuracy:        ±1.0% of the DesignCapacity()
  * See http://sbs-forum.org/specs/sbdat110.pdf page 24 for more details
  */
 int32_t AverageCurrent_Read(void)
@@ -1110,7 +1110,7 @@ uint16_t AverageTimeToEmpty_Read(void)
  * Units:           minutes
  * Range:           0 to 65,534 min
  * Granularity:     2 min or better
- * Accuracy:        ï¿½MaxError() * FullChargeCapacity() / AverageCurrent()
+ * Accuracy:        ±MaxError() * FullChargeCapacity() / AverageCurrent()
  * Invalid Data Indication: 65,535 indicates the battery is not being charged
  * See http://sbs-forum.org/specs/sbdat110.pdf page 27 for more details
  */
@@ -1189,7 +1189,7 @@ uint16_t BatteryStatus_Read(void)
  * An amount of discharge approximately equal to the value of DesignCapacity.
  * @details The CycleCount() function provides a means to determine their battery's wear. It may be used to give
  * advanced warning that the battery is nearing its end of life. The CycleCount returned value multiplied by
- * the DesignCapacity value can give an approximate ï¿½odometerï¿½ reading for the total capacity delivered by
+ * the DesignCapacity value can give an approximate “odometer” reading for the total capacity delivered by
  * the Smart Battery.
  * SMBus Protocol: Read Word
  * Address:         0x17
@@ -1326,7 +1326,7 @@ uint16_t SpecificationInfo_Read(void)
 /**
  * This function returns the date the cell pack was manufactured in a packed integer. The date is packed in the
  * following fashion: (year-1980) * 512 + month * 32 + day.
- * Due to the 1980 offset, there is no ï¿½Year 2000ï¿½ issue with the encoding of this function.
+ * Due to the 1980 offset, there is no ‘Year 2000’ issue with the encoding of this function.
  * @details The ManufactureDate() provides the system with information that can be used to uniquely identify a
  * particular battery.
  * SMBus Protocol: Read Word
