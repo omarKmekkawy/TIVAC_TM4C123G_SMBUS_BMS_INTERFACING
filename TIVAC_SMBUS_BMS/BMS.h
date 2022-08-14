@@ -27,6 +27,8 @@
 
 #define MAX_SMB_BLOCK_SIZE 12u
 
+#define DISABLE_PEC // Disable Packer Error Checking option (PEC)
+
 void HostInit(void);
 void SMBusMasterIntHandler(void);
 
