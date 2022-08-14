@@ -15,7 +15,9 @@
 #include "driverlib/can.h"
 #include "BMS.h"
 
-
+/**
+ * Global Variables
+ */
 uint16_t Manufacturer_Access;
 uint16_t Remaining_Capacity_Alarm;
 uint16_t Battery_Mode;
@@ -45,94 +47,26 @@ uint16_t Specification_Info;
 SMB_tDate Date;
 uint16_t SerialNumber;
 
-#define BMSREADDELAY 500000
-
-char c[5];
-
-void UARTIntHandler(void)
-{
-    uint32_t ui32Status;
-
-    //
-    // Get the interrrupt status.
-    //
-    ui32Status = UARTIntStatus(UART0_BASE, true);
-
-    //
-    // Clear the asserted interrupts.
-    //
-    UARTIntClear(UART0_BASE, ui32Status);
-
-    //
-    // Loop while there are characters in the receive FIFO.
-    //
-    while(UARTCharsAvail(UART0_BASE))
-    {
-        //
-        // Read the next character from the UART and write it back to the UART.
-        //
-        UARTCharPutNonBlocking(UART0_BASE,
-                               UARTCharGetNonBlocking(UART0_BASE));
-
-        //
-        // Blink the LED to show a character transfer is occuring.
-        //
-        GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, GPIO_PIN_2);
-
-        //
-        // Delay for 1 millisecond.  Each SysCtlDelay is about 3 clocks.
-        //
-        SysCtlDelay(SysCtlClockGet() / (1000 * 3));
-
-        //
-        // Turn off the LED
-        //
-        GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0);
-
-    }
-}
-
-
-
-void UARTSend(const uint8_t *pui8Buffer, uint32_t ui32Count)
-{
-    //
-    // Loop while there are more characters to send.
-    //
-    while(ui32Count--)
-    {
-        //
-        // Write the next character to the UART.
-        //
-        UARTCharPutNonBlocking(UART0_BASE, *pui8Buffer++);
-    }
-}
 
 int main(void)
 {
 
+    // Enable FPU
     FPUEnable();
     FPULazyStackingEnable();
-    //
-    // Setup the system clock to run at 50 Mhz from PLL with crystal reference
-    //
+    // Setup the system clock to run at 50MHz from PLL with crystal reference
     SysCtlClockSet(SYSCTL_SYSDIV_1|SYSCTL_USE_OSC|SYSCTL_XTAL_16MHZ| SYSCTL_OSC_MAIN);
-
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-
-    IntMasterEnable();
-
-    GPIOPinConfigure(GPIO_PA0_U0RX);
-    GPIOPinConfigure(GPIO_PA1_U0TX);
-
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA); // Enable clock for GPIOA (Used by UART0)
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0); // Enable clock for UART0 peripheral
+    GPIOPinConfigure(GPIO_PA0_U0RX); // Configure GPIO PA0 as UART0 Rx
+    GPIOPinConfigure(GPIO_PA1_U0TX); // Configure GPIO PA1 as UART0 Tx
     GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+    UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC); // Configure clock source for UART0
+    IntMasterEnable(); // Enable global interrupt
+    UARTStdioConfig(0, 115200, 16000000); // Configure UART0 with baud rate 115200
+    UARTprintf("UART Initialized \n\n\n"); // Print a test text
+    HostInit(); // Initialize Host SMBUs
 
-    UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
-    UARTStdioConfig(0, 115200, 16000000);
-    UARTprintf("UART Initialized \n\n\n");
-    // Initialize Host SMBUs
-    HostInit();
     //
     // Loop Forever
     //
@@ -140,74 +74,44 @@ int main(void)
     while(1)
     {
 
+        // Read the data from BMS registers
         Manufacturer_Access = ManufacturerAccess_Read();
-        SysCtlDelay(BMSREADDELAY);
         Remaining_Capacity_Alarm = RemainingCapacityAlarm_Read();
-        SysCtlDelay(BMSREADDELAY);
         Battery_Mode = BatteryMode_Read();
-        SysCtlDelay(BMSREADDELAY);
         At_Rate = AtRate_Read();
-        SysCtlDelay(BMSREADDELAY);
         At_Rate_Time_To_Full = AtRateTimeToFull_Read();
-        SysCtlDelay(BMSREADDELAY);
         At_Rate_Time_To_Empty = AtRateTimeToEmpty_Read();
-        SysCtlDelay(BMSREADDELAY);
         At_Rate_Ok = AtRateOK_Read();
-        SysCtlDelay(BMSREADDELAY);
         Temperature = Temperature_Read();
-        SysCtlDelay(BMSREADDELAY);
         Voltage = Voltage_Read();
-        SysCtlDelay(BMSREADDELAY);
         Current = Current_Read();
-        SysCtlDelay(BMSREADDELAY);
         Average_Current = AverageCurrent_Read();
-        SysCtlDelay(BMSREADDELAY);
         Max_Error = MaxError_Read();
-        SysCtlDelay(BMSREADDELAY);
         Relative_State_Of_Charge = RelativeStateOfCharge_Read();
-        SysCtlDelay(BMSREADDELAY);
         Absolute_State_Of_Charge = AbsoluteStateOfCharge_Read();
-        SysCtlDelay(BMSREADDELAY);
         Remaining_Capacity = RemainingCapacity_Read();
-        SysCtlDelay(BMSREADDELAY);
         Full_Charge_Capacity = FullChargeCapacity_Read();
-        SysCtlDelay(BMSREADDELAY);
         Runtime_To_Empty = RunTimeToEmpty_Read();
-        SysCtlDelay(BMSREADDELAY);
         Average_Time_To_Empty = AverageTimeToEmpty_Read();
-        SysCtlDelay(BMSREADDELAY);
         Average_Time_To_Full = AverageTimeToFull_Read();
-        SysCtlDelay(BMSREADDELAY);
         //Charging_Current
         //Charging_Voltage;
         Battery_Status = BatteryStatus_Read();
-        SysCtlDelay(BMSREADDELAY);
         Cycle_Count = CycleCount_Read();
-        SysCtlDelay(BMSREADDELAY);
         Design_Capacity = DesignCapacity_Read();
-        SysCtlDelay(BMSREADDELAY);
         Design_Voltage = DesignVoltage_Read();
-        SysCtlDelay(BMSREADDELAY);
         Specification_Info = SpecificationInfo_Read();
-        SysCtlDelay(BMSREADDELAY);
         Date = ManufactureDate_Read();
-        SysCtlDelay(BMSREADDELAY);
         SerialNumber = SerialNumber_Read();
 
-        /*SysCtlDelay(BMSREADDELAY);
-        Charging_Current = ChargingCurrent();
-        SysCtlDelay(BMSREADDELAY);
-        Charging_Voltage = ChargingVoltage();
-        SysCtlDelay(BMSREADDELAY);
-        Cell_1_Voltage = Cell1Voltage();
-        SysCtlDelay(BMSREADDELAY);
-        Cell_2_Voltage = Cell2Voltage();
-        SysCtlDelay(BMSREADDELAY);
-        Cell_3_Voltage = Cell3Voltage();*/
+        //Charging_Current = ChargingCurrent();
+        //Charging_Voltage = ChargingVoltage();
+        //Cell_1_Voltage = Cell1Voltage();
+        //Cell_2_Voltage = Cell2Voltage();
+        //Cell_3_Voltage = Cell3Voltage();
 
+        // Print the data
         UARTprintf("BQ4050 SBS Commands Example \n");
-
-
         UARTprintf("Manufacturer Access: 0x%04X \n",Manufacturer_Access);
         UARTprintf("Remaining Capacity Alarm: %d mAh\n",Remaining_Capacity_Alarm);
         UARTprintf("Battery Mode: 0x%04X \n",Battery_Mode);
@@ -238,28 +142,8 @@ int main(void)
         //UARTprintf("Cell 1 Voltage: %d mV \n",Cell_1_Voltage);
         //UARTprintf("Cell 2 Voltage: %d mV \n",Cell_2_Voltage);
         //UARTprintf("Cell 3 Voltage: %d mV \n",Cell_3_Voltage);
-
-
-
-
-
-
         //UARTprintf("Safety Status: 0x%X \n",safetystatus);
-
-
         UARTprintf("\n");
-
-        /*UARTgets(c, 3);
-        if(c[0] == 'm')
-        {
-            ToggleMosfetCMD();
-        }*/
-        //
-        // Delay for a bit
-        //
-
-        SysCtlDelay(16000000/3);
-
-
+        SysCtlDelay(16000000/3); // Delay for 1 Second
     }
 }
