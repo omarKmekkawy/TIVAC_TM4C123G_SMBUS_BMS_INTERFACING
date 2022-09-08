@@ -118,7 +118,7 @@ I am currently using a recycled laptop battery with BQ4050. Any working BMS will
 # Why Using TIVAC TM4C123G LaunchPad™ ?
 
 <p align="center">
-  <img width="70%" height="100%" src="https://www.ti.com/content/dam/ticom/images/products/ic/processors/evm-boards/ek-tm4c123gxl-angled.png:large">
+  <img width="70%" height="100%" src="./Images/ek-tm4c123gxl-angled.png">
 </p>
 
 The real reason for using TIVAC is that Texas Instruments has the best support for the SMBus and they have integrated the SMBus drivers into the [TivaWare™ for C Series](https://www.ti.com/tool/SW-TM4C) SDK. Here is the example that I have used in my code [TM4C123GH6PM: Interface Tiva C to BQ78350R1 using SMbus over I2C](https://e2e.ti.com/support/microcontrollers/arm-based-microcontrollers-group/arm-based-microcontrollers/f/arm-based-microcontrollers-forum/766769/tm4c123gh6pm-smbus?tisearch=e2e-sitesearch&keymatch=smbus%20TivaC#). Also, they make awesome battery management systems kits and tools.
